@@ -1,0 +1,35 @@
+doctype html
+head
+	title dbshow
+	link(rel= "stylesheet" type= "text/css" href= "/stylesheets/dbtable.css")
+table(id="myTable")
+	tr(class="header")
+		th(style="width:30%;") time
+		th(style="width:60%;") gatewayId
+	
+	each obj in docs
+		tr
+			each val,key in obj
+				if key=='time'
+					td= timeStamp2String(val)
+				if key=='gatewayId'
+					td= val
+//div
+	//button(type= "button" onclick= "nextPage()") next page
+//p(id= "demo") test
+//script(src= "/javascripts/nextpage.js")		
+
+
+-
+	function timeStamp2String(time){
+		var datetime = new Date();
+		datetime.setTime(time);
+		var year = datetime.getFullYear();
+		var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+		var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+		var hour = datetime.getHours()< 10 ? "0" + datetime.getHours() : datetime.getHours();
+		var minute = datetime.getMinutes()< 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+		var second = datetime.getSeconds()< 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+		return year + "-" + month + "-" + date+" "+hour+":"+minute+":"+second;
+	}
+			
